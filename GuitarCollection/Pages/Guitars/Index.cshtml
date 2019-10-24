@@ -1,0 +1,66 @@
+﻿@page
+@model GuitarCollection.Pages.Guitars.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Add New Guitar to the Collection</a>
+</p>
+
+<form>
+	<p>
+		Brand: 
+		<select asp-for="GuitarGuitarBrand" asp-items="Model.GuitarBrands">
+			<option value="">All</option>
+		</select>
+		Search by Type: <input type="text" asp-for="SearchString" />
+		<input type="submit" value="Filter" />
+	</p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Guitar[0].GuitarType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guitar[0].GuitarBrand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guitar[0].NumStrings)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guitar[0].StringBrand)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Guitar) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuitarType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuitarBrand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumStrings)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StringBrand)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
